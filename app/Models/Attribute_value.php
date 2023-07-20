@@ -9,4 +9,12 @@ class Attribute_value extends Model
 {
     use HasFactory;
     protected $table='attribute_values';
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
 }

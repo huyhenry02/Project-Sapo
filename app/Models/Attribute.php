@@ -9,4 +9,8 @@ class Attribute extends Model
 {
     use HasFactory;
     protected $table='attributes';
+    public function attribute_values()
+    {
+        return $this->hasMany(Attribute_value::class);
+    }
 }

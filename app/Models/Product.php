@@ -9,4 +9,25 @@ class Product extends Model
 {
     use HasFactory;
     protected $table='products';
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+    public function attribute_values()
+    {
+        return $this->hasMany(Attribute_value::class);
+    }
+    public function order_details()
+    {
+        return $this->hasMany(Order_detail::class);
+    }
+
 }
