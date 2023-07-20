@@ -76,7 +76,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link " href="{{route('show_edit_user.index')}}" title="Referrals">
                                         <span class="tio-circle nav-indicator-icon"></span>
-                                        <span class="text-truncate">Sửa người dùng</span>
+                                        <span class="text-truncate">Cập nhật người dùng</span>
                                     </a>
                                 </li>
                             </ul>
@@ -130,7 +130,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link " href="{{route('show_edit_brand.index')}}" title="Referrals">
                                         <span class="tio-circle nav-indicator-icon"></span>
-                                        <span class="text-truncate">Sửa thương hiệu</span>
+                                        <span class="text-truncate">Cập nhật thương hiệu</span>
                                     </a>
                                 </li>
                             </ul>
@@ -160,7 +160,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link " href="{{route('show_edit_category.index')}}" title="Referrals">
                                         <span class="tio-circle nav-indicator-icon"></span>
-                                        <span class="text-truncate">Sửa danh mục</span>
+                                        <span class="text-truncate">Cập nhật danh mục</span>
                                     </a>
                                 </li>
                             </ul>
@@ -190,7 +190,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link " href="referrals.html" title="Referrals">
                                         <span class="tio-circle nav-indicator-icon"></span>
-                                        <span class="text-truncate">Sửa Thông tin</span>
+                                        <span class="text-truncate">Cập nhật Thông tin</span>
                                     </a>
                                 </li>
                             </ul>
@@ -220,7 +220,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link " href="{{route('show_edit_order.index')}}" title="Referrals">
                                         <span class="tio-circle nav-indicator-icon"></span>
-                                        <span class="text-truncate">Sửa đơn hàng</span>
+                                        <span class="text-truncate">Cập nhật đơn hàng</span>
                                     </a>
                                 </li>
 
@@ -251,7 +251,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link " href="{{route('show_edit_product.index')}}" title="Referrals">
                                         <span class="tio-circle nav-indicator-icon"></span>
-                                        <span class="text-truncate">Sửa sản phẩm</span>
+                                        <span class="text-truncate">Cập nhật sản phẩm</span>
                                     </a>
                                 </li>
                             </ul>
@@ -281,7 +281,37 @@
                                 <li class="nav-item">
                                     <a class="nav-link " href="{{route('show_edit_vendor.index')}}" title="Referrals">
                                         <span class="tio-circle nav-indicator-icon"></span>
-                                        <span class="text-truncate">Sửa nhà cung cấp</span>
+                                        <span class="text-truncate">Cập nhật nhà cung cấp</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End Vendor -->
+                        <!-- Vendor -->
+                        <li class="navbar-vertical-aside-has-menu ">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Pages">
+                                <i class="tio-pages-outlined nav-icon"></i>
+                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Thuộc tính</span>
+                            </a>
+
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
+
+                                <li class="nav-item">
+                                    <a class="nav-link " href="{{route('show_list_attribute.index')}}" title="Referrals">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">Danh sách</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="{{route('show_add_attribute.index')}}" title="Referrals">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">Thêm thuộc tính</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="{{route('show_edit_attribute.index')}}" title="Referrals">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">Cập nhật thuộc tính</span>
                                     </a>
                                 </li>
                             </ul>

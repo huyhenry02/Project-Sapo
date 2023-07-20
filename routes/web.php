@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\AttributeController;
 
 Route::get('/', function () {
     return view('layout.main');
@@ -74,6 +75,12 @@ Route::prefix('page')->group(function () {
         Route::get('/show_list_vendor', [VendorController::class, 'show_list_vendor'])->name('show_list_vendor.index');
         Route::get('/show_add_vendor', [VendorController::class, 'show_add_vendor'])->name('show_add_vendor.index');
         Route::get('/show_edit_vendor', [VendorController::class, 'show_edit_vendor'])->name('show_edit_vendor.index');
+    });
+    //Attribute
+    Route::prefix('attribute')->group(function (){
+        Route::get('/show_list_attribute', [AttributeController::class, 'show_list_attribute'])->name('show_list_attribute.index');
+        Route::get('/show_add_attribute', [AttributeController::class, 'show_add_attribute'])->name('show_add_attribute.index');
+        Route::get('/show_edit_attribute', [AttributeController::class, 'show_edit_attribute'])->name('show_edit_attribute.index');
     });
 });
 
