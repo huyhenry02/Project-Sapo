@@ -18,10 +18,15 @@ Route::get('/', function () {
 });
 //login
 Route::prefix('auth_login')->group(function () {
+    //show
     Route::get('/login', [AuthAdminController::class, 'show_login'])->name('show_login.index');
     Route::get('/change_pass', [AuthAdminController::class, 'show_change_pass'])->name('show_change_pass.index');
     Route::get('/verified_email', [AuthAdminController::class, 'show_verified_email'])->name('show_verified_email.index');
     Route::get('/send_email_forgot_pass', [AuthAdminController::class, 'show_send_email_forgot_pass'])->name('show_send_email_forgot_pass.index');
+    //post
+    Route::post('/login', [AuthAdminController::class, 'login'])->name('login.post');
+    Route::get('/actived', [AuthAdminController::class, 'actived'])->name('actived.admin');
+
 });
 //Page
 Route::prefix('page')->group(function () {
@@ -32,9 +37,14 @@ Route::prefix('page')->group(function () {
     });
     //User
     Route::prefix('user')->group(function (){
+        //show
         Route::get('/show_list_user', [UserController::class, 'show_list_user'])->name('show_list_user.index');
         Route::get('/show_add_user', [UserController::class, 'show_add_user'])->name('show_add_user.index');
         Route::get('/show_edit_user', [UserController::class, 'show_edit_user'])->name('show_edit_user.index');
+
+        //post
+        Route::post('/add_user', [UserController::class, 'add_user'])->name('add_user.post');
+
     });
     //Statistic
     Route::prefix('statistic')->group(function (){

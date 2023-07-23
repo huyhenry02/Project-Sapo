@@ -10,7 +10,8 @@
                 "stepsSelector": "#addUserStepFormContent",
                 "endSelector": "#addUserFinishBtn",
                 "isValidate": false
-              }'>
+              }' method="post" action="{{route('add_user.post')}}" enctype="multipart/form-data">
+                @csrf
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-8">
                         <!-- Step -->
@@ -19,34 +20,13 @@
                                 <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
                       "targetSelector": "#addUserStepProfile"
                     }'>
-                                    <span class="step-icon step-icon-soft-dark">1</span>
+                                    <span class="step-icon step-icon-soft-dark"></span>
                                     <div class="step-content">
-                                        <span class="step-title">Profile</span>
+                                        <span class="step-title"> Hồ sơ cá nhân</span>
                                     </div>
                                 </a>
                             </li>
 
-                            <li class="step-item">
-                                <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
-                      "targetSelector": "#addUserStepBillingAddress"
-                    }'>
-                                    <span class="step-icon step-icon-soft-dark">2</span>
-                                    <div class="step-content">
-                                        <span class="step-title">Billing address</span>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="step-item">
-                                <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
-                      "targetSelector": "#addUserStepConfirmation"
-                    }'>
-                                    <span class="step-icon step-icon-soft-dark">3</span>
-                                    <div class="step-content">
-                                        <span class="step-title">Confirmation</span>
-                                    </div>
-                                </a>
-                            </li>
                         </ul>
                         <!-- End Step -->
 
@@ -58,13 +38,13 @@
                                 <div class="card-body">
                                     <!-- Form Group -->
                                     <div class="row form-group">
-                                        <label class="col-sm-3 col-form-label input-label">Avatar</label>
+                                        <label class="col-sm-3 col-form-label input-label">Ảnh đại diện</label>
 
                                         <div class="col-sm-9">
                                             <div class="d-flex align-items-center">
                                                 <!-- Avatar -->
                                                 <label class="avatar avatar-xl avatar-circle avatar-uploader mr-5" for="avatarUploader">
-                                                    <img id="avatarImg" class="avatar-img" src="assets\img\160x160\img1.jpg" alt="Image Description">
+                                                    <img id="avatarImg" class="avatar-img" src="/frontend/assets\img\160x160\img1.jpg" alt="Image Description">
 
                                                     <input type="file" class="js-file-attach avatar-uploader-input" id="avatarUploader" data-hs-file-attach-options='{
                                       "textTarget": "#avatarImg",
@@ -73,7 +53,7 @@
                                       "resetTarget": ".js-file-attach-reset-img",
                                       "resetImg": "./assets/img/160x160/img1.jpg",
                                       "allowTypes": [".png", ".jpeg", ".jpg"]
-                                   }'>
+                                   }' name="avatar">
 
                                                     <span class="avatar-uploader-trigger">
                               <i class="tio-edit avatar-uploader-icon shadow-soft"></i>
@@ -81,7 +61,7 @@
                                                 </label>
                                                 <!-- End Avatar -->
 
-                                                <button type="button" class="js-file-attach-reset-img btn btn-white">Delete</button>
+                                                <button type="button" class="js-file-attach-reset-img btn btn-white">Xóa</button>
                                             </div>
                                         </div>
                                     </div>
@@ -89,12 +69,12 @@
 
                                     <!-- Form Group -->
                                     <div class="row form-group">
-                                        <label for="firstNameLabel" class="col-sm-3 col-form-label input-label">Full name <i class="tio-help-outlined text-body ml-1" data-toggle="tooltip" data-placement="top" title="Displayed on public forums, such as Front."></i></label>
+                                        <label for="firstNameLabel" class="col-sm-3 col-form-label input-label">Họ và tên<i class="tio-help-outlined text-body ml-1" data-toggle="tooltip" data-placement="top" title="Displayed on public forums, such as Front."></i></label>
 
                                         <div class="col-sm-9">
                                             <div class="input-group input-group-sm-down-break">
-                                                <input type="text" class="form-control" name="firstName" id="firstNameLabel" placeholder="Clarice" aria-label="Clarice">
-                                                <input type="text" class="form-control" name="lastName" id="lastNameLabel" placeholder="Boone" aria-label="Boone">
+                                                <input type="text" class="form-control" name="firstname" id="firstNameLabel" placeholder="Clarice" aria-label="Clarice">
+                                                <input type="text" class="form-control" name="lastname" id="lastNameLabel" placeholder="Boone" aria-label="Boone">
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +96,7 @@
                             "container": "#addPhoneFieldContainer",
                             "defaultCreated": 0
                           }'>
-                                        <label for="phoneLabel" class="col-sm-3 col-form-label input-label">Phone <span class="input-label-secondary">(Optional)</span></label>
+                                        <label for="phoneLabel" class="col-sm-3 col-form-label input-label">Số điện thoại <span class="input-label-secondary"></span></label>
 
                                         <div class="col-sm-9">
                                             <div class="input-group input-group-sm-down-break align-items-center">
@@ -124,31 +104,10 @@
                                    "template": "+0(000)000-00-00"
                                  }'>
 
-                                                <div class="input-group-append">
-                                                    <!-- Select -->
-                                                    <div class="select2-custom">
-                                                        <select class="js-select2-custom custom-select" size="1" style="opacity: 0;" name="phoneSelect" data-hs-select2-options='{
-                                      "minimumResultsForSearch": "Infinity",
-                                      "dropdownAutoWidth": true,
-                                      "width": "6rem"
-                                    }'>
-                                                            <option value="Mobile" selected="">Mobile</option>
-                                                            <option value="Home">Home</option>
-                                                            <option value="Work">Work</option>
-                                                            <option value="Fax">Fax</option>
-                                                            <option value="Direct">Direct</option>
-                                                        </select>
-                                                        <!-- End Select -->
-                                                    </div>
-                                                </div>
                                             </div>
 
                                             <!-- Container For Input Field -->
                                             <div id="addPhoneFieldContainer"></div>
-
-                                            <a class="js-create-field form-link btn btn-sm btn-no-focus btn-ghost-primary" href="javascript:;">
-                                                <i class="tio-add"></i> Add phone
-                                            </a>
                                         </div>
                                     </div>
                                     <!-- End Form Group -->
@@ -165,81 +124,86 @@
                                     </div>
                                     <!-- End Add Phone Input Field -->
 
-                                    <!-- Add Phone Input Field -->
-                                    <div id="addPhoneFieldTemplate" class="input-group-add-field" style="display: none;">
-                                        <div class="input-group input-group-sm-down-break align-items-center">
-                                            <input type="text" class="js-masked-input form-control" data-name="additionlPhone" placeholder="+x(xxx)xxx-xx-xx" aria-label="+x(xxx)xxx-xx-xx" data-hs-mask-options='{
-                                 "template": "+0(000)000-00-00"
-                               }'>
-
-                                            <div class="input-group-append">
-                                                <!-- Select -->
-                                                <div class="select2-custom">
-                                                    <select class="js-select2-custom-dynamic custom-select" size="1" style="opacity: 0;" data-name="additionlPhoneSelect" data-hs-select2-options='{
-                                    "minimumResultsForSearch": "Infinity",
-                                    "dropdownAutoWidth": true,
-                                    "width": "6rem"
-                                  }'>
-                                                        <option value="Mobile" selected="">Mobile</option>
-                                                        <option value="Home">Home</option>
-                                                        <option value="Work">Work</option>
-                                                        <option value="Fax">Fax</option>
-                                                        <option value="Direct">Direct</option>
-                                                    </select>
-                                                </div>
-                                                <!-- End Select -->
-                                            </div>
-                                        </div>
-
-                                        <a class="js-delete-field input-group-add-field-delete" href="javascript:;">
-                                            <i class="tio-clear"></i>
-                                        </a>
-                                    </div>
-                                    <!-- End Add Phone Input Field -->
-
                                     <!-- Form Group -->
                                     <div class="row form-group">
-                                        <label for="organizationLabel" class="col-sm-3 col-form-label input-label">Organization</label>
+                                        <label for="organizationLabel" class="col-sm-3 col-form-label input-label">Địa chỉ</label>
 
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="organization" id="organizationLabel" placeholder="Htmlstream" aria-label="Htmlstream">
-                                        </div>
-                                    </div>
-                                    <!-- End Form Group -->
-
-                                    <!-- Form Group -->
-                                    <div class="row form-group">
-                                        <label for="departmentLabel" class="col-sm-3 col-form-label input-label">Department</label>
-
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="department" id="departmentLabel" placeholder="Human resources" aria-label="Human resources">
+                                            <input type="text" class="form-control" name="address" id="organizationLabel" placeholder="Htmlstream" aria-label="Htmlstream">
                                         </div>
                                     </div>
                                     <!-- End Form Group -->
 
                                     <!-- Form Group -->
                                     <div class="row">
-                                        <label class="col-sm-3 col-form-label input-label">Account type</label>
+                                        <label class="col-sm-3 col-form-label input-label">Giới tính</label>
 
                                         <div class="col-sm-9">
                                             <div class="input-group input-group-sm-down-break">
                                                 <!-- Custom Radio -->
                                                 <div class="form-control">
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" class="custom-control-input" name="userAccountTypeRadio" id="userAccountTypeRadio1">
-                                                        <label class="custom-control-label" for="userAccountTypeRadio1">Individual</label>
+                                                        <input type="radio" class="custom-control-input" name="gender" id="userAccountTypeRadio1" value="1">
+                                                        <label class="custom-control-label" for="userAccountTypeRadio1">Nam</label>
                                                     </div>
                                                 </div>
                                                 <!-- End Custom Radio -->
-
                                                 <!-- Custom Radio -->
                                                 <div class="form-control">
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" class="custom-control-input" name="userAccountTypeRadio" id="userAccountTypeRadio2">
-                                                        <label class="custom-control-label" for="userAccountTypeRadio2">Company</label>
+                                                        <input type="radio" class="custom-control-input" name="gender" id="userAccountTypeRadio2" value="2">
+                                                        <label class="custom-control-label" for="userAccountTypeRadio2">Nữ</label>
                                                     </div>
                                                 </div>
                                                 <!-- End Custom Radio -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="organizationLabel" class="col-sm-3 col-form-label input-label">Tên người dùng</label>
+
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="username" id="organizationLabel" placeholder="Htmlstream" aria-label="Htmlstream">
+                                        </div>
+                                    </div>
+
+                                    <div class="js-form-message form-group">
+                                        <label class="input-label" for="signupSrPassword">Mật khẩu</label>
+
+                                        <div class="input-group input-group-merge">
+                                            <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="signupSrPassword" placeholder="8+ characters required" aria-label="8+ characters required" required="" data-msg="Your password is invalid. Please try again." data-hs-toggle-password-options='{
+                               "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
+                               "defaultClass": "tio-hidden-outlined",
+                               "showClass": "tio-visible-outlined",
+                               "classChangeTarget": ".js-toggle-passowrd-show-icon-1"
+                             }'>
+                                            <div class="js-toggle-password-target-1 input-group-append">
+                                                <a class="input-group-text" href="javascript:;">
+                                                    <i class="js-toggle-passowrd-show-icon-1 tio-visible-outlined"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Form Group -->
+
+                                    <!-- Form Group -->
+                                    <div class="js-form-message form-group">
+                                        <label class="input-label" for="signupSrConfirmPassword">Xác nhận mât khẩu</label>
+
+                                        <div class="input-group input-group-merge">
+                                            <input type="password" class="js-toggle-password form-control form-control-lg" name="confirmPassword" id="signupSrConfirmPassword" placeholder="8+ characters required" aria-label="8+ characters required" required="" data-msg="Password does not match the confirm password." data-hs-toggle-password-options='{
+                               "target": [".js-toggle-password-target-1", ".js-toggle-password-target-2"],
+                               "defaultClass": "tio-hidden-outlined",
+                               "showClass": "tio-visible-outlined",
+                               "classChangeTarget": ".js-toggle-passowrd-show-icon-2"
+                             }'>
+                                            <div class="js-toggle-password-target-2 input-group-append">
+                                                <a class="input-group-text" href="javascript:;">
+                                                    <i class="js-toggle-passowrd-show-icon-2 tio-visible-outlined"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -249,10 +213,10 @@
 
                                 <!-- Footer -->
                                 <div class="card-footer d-flex justify-content-end align-items-center">
-                                    <button type="button" class="btn btn-primary" data-hs-step-form-next-options='{
+                                    <button type="submit" class="btn btn-primary" data-hs-step-form-next-options='{
                               "targetSelector": "#addUserStepBillingAddress"
                             }'>
-                                        Next <i class="tio-chevron-right"></i>
+                                        Tạo người dùng <i class="tio-chevron-right"></i>
                                     </button>
                                 </div>
                                 <!-- End Footer -->
