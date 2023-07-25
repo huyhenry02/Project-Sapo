@@ -38,13 +38,18 @@ class AuthAdminController extends Controller
     }
     public function actived(User $user, $token)
     {
-        if($user->token === $token){
+        if($user->authToken === $token){
             $user->update(['status'=>1]);
             Session::put('success_actived', 'tài khoản đã được xác nhận ');
-            return redirect()->route('login_client.index');
+            return redirect()->route('show_login.index');
         }else{
-            return redirect()->route('login_client.index')->with('false_actived', 'tài khoản chưa được xác nhận ');
+            return redirect()->route('show_login.index')->with('false_actived', 'tài khoản chưa được xác nhận ');
         }
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('show_login.index');
     }
 
 }

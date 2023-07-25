@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BrandController extends Controller
 {
     public function show_list_brand()
     {
-        return view('page.brand.list');
+        $brand = Brand::all();
+        $brandCount = Brand::count();
+        $activeBrandCount = DB::table('brands')->where('active', 1)->count();
+        return view('page.brand.list',['brand'=>$brand,'brandCount'=>$brandCount,'activeBrandCount'=>$activeBrandCount]);
     }
     public function show_add_brand()
     {
@@ -17,5 +22,13 @@ class BrandController extends Controller
     public function show_edit_brand()
     {
         return view('page.brand.edit');
+    }
+
+    public function add(Request $request){
+        $brand = new Brand();
+        $brand->name = $request->input('name');
+        $brand->active = $request->input('active');
+        $brand->save();
+        return redirect()->route('show_list_brand.index');
     }
 }

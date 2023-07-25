@@ -738,7 +738,7 @@
 
                                 <div class="dropdown-divider"></div>
 
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{route('logout.admin')}}">
                                     <span class="text-truncate pr-2" title="Sign out">Sign out</span>
                                 </a>
                             </div>

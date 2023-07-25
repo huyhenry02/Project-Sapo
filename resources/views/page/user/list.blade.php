@@ -1,5 +1,6 @@
 @extends('layout.main')
-@section('content')    <main id="content" role="main" class="main">
+@section('content')
+    <main id="content" role="main" class="main">
     <!-- Content -->
     <div class="content container-fluid">
         <!-- Page Header -->
@@ -8,37 +9,36 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-no-gutter">
-                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Pages</a></li>
-                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Users</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Overview</li>
+                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Trang</a></li>
+                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Người dùng</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Danh sách</li>
                         </ol>
                     </nav>
 
-                    <h1 class="page-header-title">Users</h1>
+                    <h1 class="page-header-title">Người dùng</h1>
                 </div>
 
                 <div class="col-sm-auto">
                     <a class="btn btn-primary" href="users-add-user.html">
-                        <i class="tio-user-add mr-1"></i> Add user
+                        <i class="tio-user-add mr-1"></i> Thêm người dùng
                     </a>
                 </div>
             </div>
             <!-- End Row -->
         </div>
         <!-- End Page Header -->
-
         <!-- Stats -->
         <div class="row gx-2 gx-lg-3">
             <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
                 <!-- Card -->
                 <div class="card h-100">
                     <div class="card-body">
-                        <h6 class="card-subtitle mb-2">Total users</h6>
+                        <h6 class="card-subtitle mb-2">Tổng số người dùng</h6>
 
                         <div class="row align-items-center gx-2">
                             <div class="col">
-                                <span class="js-counter display-4 text-dark">24</span>
-                                <span class="text-body font-size-sm ml-1">from 22</span>
+                                <span class="js-counter display-4 text-dark">{{$userCount }}</span>
+
                             </div>
 
                             <div class="col-auto">
@@ -57,12 +57,12 @@
                 <!-- Card -->
                 <div class="card h-100">
                     <div class="card-body">
-                        <h6 class="card-subtitle mb-2">Active members</h6>
+                        <h6 class="card-subtitle mb-2">Thành viên đang hoạt động</h6>
 
                         <div class="row align-items-center gx-2">
                             <div class="col">
-                                <span class="js-counter display-4 text-dark">12</span>
-                                <span class="text-body font-size-sm ml-1">from 11</span>
+                                <span class="js-counter display-4 text-dark">{{$activeUserCount}}</span>
+                                <span class="text-body font-size-sm ml-1">từ {{$userCount}}</span>
                             </div>
 
                             <div class="col-auto">
@@ -76,53 +76,6 @@
                 </div>
                 <!-- End Card -->
             </div>
-
-            <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-                <!-- Card -->
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2">New/returning</h6>
-
-                        <div class="row align-items-center gx-2">
-                            <div class="col">
-                                <span class="js-counter display-4 text-dark">56</span>
-                                <span class="display-4 text-dark">%</span>
-                                <span class="text-body font-size-sm ml-1">from 48.7</span>
-                            </div>
-
-                            <div class="col-auto">
-                                    <span class="badge badge-soft-danger p-1">
-                      <i class="tio-trending-down"></i> 2.8%
-                    </span>
-                            </div>
-                        </div>
-                        <!-- End Row -->
-                    </div>
-                </div>
-                <!-- End Card -->
-            </div>
-
-            <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-                <!-- Card -->
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2">Active members</h6>
-
-                        <div class="row align-items-center gx-2">
-                            <div class="col">
-                                <span class="js-counter display-4 text-dark">28.6</span>
-                                <span class="display-4 text-dark">%</span>
-                                <span class="text-body font-size-sm ml-1">from 28.6%</span>
-                            </div>
-
-                            <div class="col-auto">
-                                <span class="badge badge-soft-secondary p-1">0.0%</span>
-                            </div>
-                        </div>
-                        <!-- End Row -->
-                    </div>
-                </div>
-                <!-- End Card -->
             </div>
         </div>
         <!-- End Stats -->
@@ -141,7 +94,7 @@
                                         <i class="tio-search"></i>
                                     </div>
                                 </div>
-                                <input id="datatableSearch" type="search" class="form-control" placeholder="Search users" aria-label="Search users">
+                                <input id="datatableSearch" type="search" class="form-control" placeholder="Tìm kiếm" aria-label="Search users">
                             </div>
                             <!-- End Search -->
                         </form>
@@ -168,27 +121,27 @@
                          "target": "#usersExportDropdown",
                          "type": "css-animation"
                        }'>
-                                    <i class="tio-download-to mr-1"></i> Export
+                                    <i class="tio-download-to mr-1"></i> IN
                                 </a>
 
                                 <div id="usersExportDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
                                     <span class="dropdown-header">Options</span>
                                     <a id="export-copy" class="dropdown-item" href="javascript:;">
-                                        <img class="avatar avatar-xss avatar-4by3 mr-2" src="assets\svg\illustrations\copy.svg" alt="Image Description"> Copy
+                                        <img class="avatar avatar-xss avatar-4by3 mr-2" src="/frontend/assets\svg\illustrations\copy.svg" alt="Image Description"> Copy
                                     </a>
                                     <a id="export-print" class="dropdown-item" href="javascript:;">
-                                        <img class="avatar avatar-xss avatar-4by3 mr-2" src="assets\svg\illustrations\print.svg" alt="Image Description"> Print
+                                        <img class="avatar avatar-xss avatar-4by3 mr-2" src="/frontend/assets\svg\illustrations\print.svg" alt="Image Description"> Print
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <span class="dropdown-header">Download options</span>
                                     <a id="export-excel" class="dropdown-item" href="javascript:;">
-                                        <img class="avatar avatar-xss avatar-4by3 mr-2" src="assets\svg\brands\excel.svg" alt="Image Description"> Excel
+                                        <img class="avatar avatar-xss avatar-4by3 mr-2" src="/frontend/assets\svg\brands\excel.svg" alt="Image Description"> Excel
                                     </a>
                                     <a id="export-csv" class="dropdown-item" href="javascript:;">
-                                        <img class="avatar avatar-xss avatar-4by3 mr-2" src="assets\svg\components\placeholder-csv-format.svg" alt="Image Description"> .CSV
+                                        <img class="avatar avatar-xss avatar-4by3 mr-2" src="/frontend/assets\svg\components\placeholder-csv-format.svg" alt="Image Description"> .CSV
                                     </a>
                                     <a id="export-pdf" class="dropdown-item" href="javascript:;">
-                                        <img class="avatar avatar-xss avatar-4by3 mr-2" src="assets\svg\brands\pdf.svg" alt="Image Description"> PDF
+                                        <img class="avatar avatar-xss avatar-4by3 mr-2" src="/frontend/assets\svg\brands\pdf.svg" alt="Image Description"> PDF
                                     </a>
                                 </div>
                             </div>
@@ -201,7 +154,7 @@
                          "type": "css-animation",
                          "smartPositionOff": true
                        }'>
-                                    <i class="tio-filter-list mr-1"></i> Filter <span class="badge badge-soft-dark rounded-circle ml-1">2</span>
+                                    <i class="tio-filter-list mr-1"></i> LỌC <span class="badge badge-soft-dark rounded-circle ml-1">2</span>
                                 </a>
 
                                 <div id="usersFilterDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right dropdown-card card-dropdown-filter-centered" style="min-width: 22rem;">
@@ -590,17 +543,19 @@
                                 <label class="custom-control-label" for="datatableCheckAll"></label>
                             </div>
                         </th>
-                        <th class="table-column-pl-0">Name</th>
-                        <th>Position</th>
-                        <th>Country</th>
-                        <th>Status</th>
-                        <th>Portfolio</th>
-                        <th>Role</th>
+                        <th class="table-column-pl-0">Họ và tên</th>
+
+                        <th>Địa chỉ</th>
+                        <th>Tên người dùng</th>
+                        <th>Trạng thái</th>
+                        <th>Giới tính</th>
+                        <th>Quyền hạn</th>
                         <th></th>
                     </tr>
                     </thead>
 
                     <tbody>
+                    @foreach($user as $key=>$val)
                     <tr>
                         <td class="table-column-pr-0">
                             <div class="custom-control custom-checkbox">
@@ -611,1006 +566,50 @@
                         <td class="table-column-pl-0">
                             <a class="d-flex align-items-center" href="user-profile.html">
                                 <div class="avatar avatar-circle">
-                                    <img class="avatar-img" src="assets\img\160x160\img10.jpg" alt="Image Description">
+                                    <img class="avatar-img" src="{{ $val ? $val->avatar  : '' }}" alt="Image Description">
                                 </div>
                                 <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Amanda Harvey <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
-                                    <span class="d-block font-size-sm text-body">amanda@example.com</span>
+                                    <span class="d-block h5 text-hover-primary mb-0">{{ $val ? $val->firstname : '' }} {{ $val ? $val->lastname : '' }} <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
+                                    <span class="d-block font-size-sm text-body">{{ $val ? $val->email : '' }}</span>
                                 </div>
                             </a>
                         </td>
+                        <td>{{ $val ? $val->address : '' }}<span class="text-hide">Code: GB</span></td>
+                        <td>{{ $val ? $val->username : '' }}<span class="text-hide">Code: GB</span></td>
+
                         <td>
-                            <span class="d-block h5 mb-0">Director</span>
-                            <span class="d-block font-size-sm">Human resources</span>
+                            @if ($val->status == 0)
+                                <span class="legend-indicator bg-danger"></span>Chưa hoạt động
+                            @elseif ($val->status == 1)
+                                <span class="legend-indicator bg-success"></span>Đang hoạt động
+                            @endif
+
                         </td>
-                        <td>United Kingdom <span class="text-hide">Code: GB</span></td>
+
                         <td>
-                            <span class="legend-indicator bg-success"></span>Active
+                            @if ($val->gender == 2)
+                                <span class="legend-indicator bg-primary"></span>Nữ
+                            @elseif ($val->gender == 1)
+                                <span class="legend-indicator bg-primary"></span>Nam
+                            @endif
                         </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">72%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
+
+                        <td>Khách hàng</td>
                         <td>
                             <div id="editUserPopover" data-toggle="popover-dark" data-placement="left" title="<div class='d-flex align-items-center'>Edit user <a href='#!' class='close close-light ml-auto'><i id='closeEditUserPopover' class='tio-clear'></i></a></div>" data-content="Check out this Edit user modal example."
                                  data-html="true">
                                 <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                    <i class="tio-edit"></i> Edit
+                                    <i class="tio-edit"></i> Sửa
+                                </a>
+                                <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
+                                    <i class="tio-delete"></i> Xóa
                                 </a>
                             </div>
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck2">
-                                <label class="custom-control-label" for="usersDataCheck2"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-primary avatar-circle">
-                                    <span class="avatar-initials">A</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Anne Richard</span>
-                                    <span class="d-block font-size-sm text-body">anne@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Seller</span>
-                            <span class="d-block font-size-sm">Branding products</span>
-                        </td>
-                        <td>United States <span class="text-hide">Code: US</span></td>
-                        <td>
-                            <span class="legend-indicator bg-warning"></span>Pending
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">24%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 24%" aria-valuenow="24" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
                         </td>
                     </tr>
+                    @endforeach
 
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck3">
-                                <label class="custom-control-label" for="usersDataCheck3"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-circle">
-                                    <img class="avatar-img" src="assets\img\160x160\img3.jpg" alt="Image Description">
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">David Harrison</span>
-                                    <span class="d-block font-size-sm text-body">david@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Unknown</span>
-                            <span class="d-block font-size-sm">Unknown</span>
-                        </td>
-                        <td>United States <span class="text-hide">Code: US</span></td>
-                        <td>
-                            <span class="legend-indicator bg-success"></span>Active
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">100%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck4">
-                                <label class="custom-control-label" for="usersDataCheck4"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-circle">
-                                    <img class="avatar-img" src="assets\img\160x160\img5.jpg" alt="Image Description">
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Finch Hoot</span>
-                                    <span class="d-block font-size-sm text-body">finch@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Designer</span>
-                            <span class="d-block font-size-sm">IT department</span>
-                        </td>
-                        <td>Argentina <span class="text-hide">Code: AR</span></td>
-                        <td>
-                            <span class="legend-indicator bg-danger"></span>Suspended
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">50%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck5">
-                                <label class="custom-control-label" for="usersDataCheck5"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-dark avatar-circle">
-                                    <span class="avatar-initials">B</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Bob Dean</span>
-                                    <span class="d-block font-size-sm text-body">bob@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Executive director</span>
-                            <span class="d-block font-size-sm">Marketing</span>
-                        </td>
-                        <td>Austria <span class="text-hide">Code: AT</span></td>
-                        <td>
-                            <span class="legend-indicator bg-success"></span>Active
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">5%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck6">
-                                <label class="custom-control-label" for="usersDataCheck6"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-circle">
-                                    <img class="avatar-img" src="assets\img\160x160\img9.jpg" alt="Image Description">
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Ella Lauda <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
-                                    <span class="d-block font-size-sm text-body">ella@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Co-founder</span>
-                            <span class="d-block font-size-sm">All departments</span>
-                        </td>
-                        <td>United Kingdom <span class="text-hide">Code: GB</span></td>
-                        <td>
-                            <span class="legend-indicator bg-success"></span>Active
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">100%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Owner</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck7">
-                                <label class="custom-control-label" for="usersDataCheck7"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-info avatar-circle">
-                                    <span class="avatar-initials">L</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Lori Hunter</span>
-                                    <span class="d-block font-size-sm text-body">hunter@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Developer</span>
-                            <span class="d-block font-size-sm">Mobile app</span>
-                        </td>
-                        <td>Estonia <span class="text-hide">Code: EE</span></td>
-                        <td>
-                            <span class="legend-indicator bg-success"></span>Active
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">100%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck16">
-                                <label class="custom-control-label" for="usersDataCheck16"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-primary avatar-circle">
-                                    <span class="avatar-initials">M</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Mark Colbert</span>
-                                    <span class="d-block font-size-sm text-body">mark@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Executive director</span>
-                            <span class="d-block font-size-sm">Human resources</span>
-                        </td>
-                        <td>Canada <span class="text-hide">Code: CA</span></td>
-                        <td>
-                            <span class="legend-indicator bg-success"></span>Active
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">90%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck9">
-                                <label class="custom-control-label" for="usersDataCheck9"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-circle">
-                                    <img class="avatar-img" src="assets\img\160x160\img6.jpg" alt="Image Description">
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Costa Quinn</span>
-                                    <span class="d-block font-size-sm text-body">costa@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Co-founder</span>
-                            <span class="d-block font-size-sm">All departments</span>
-                        </td>
-                        <td>France <span class="text-hide">Code: FR</span></td>
-                        <td>
-                            <span class="legend-indicator bg-warning"></span>Pending
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">83%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 83%" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Owner</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck10">
-                                <label class="custom-control-label" for="usersDataCheck10"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-danger avatar-circle">
-                                    <span class="avatar-initials">R</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Rachel Doe <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
-                                    <span class="d-block font-size-sm text-body">rachel@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Accountant</span>
-                            <span class="d-block font-size-sm">Finance</span>
-                        </td>
-                        <td>United States <span class="text-hide">Code: US</span></td>
-                        <td>
-                            <span class="legend-indicator bg-success"></span>Active
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">30%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck11">
-                                <label class="custom-control-label" for="usersDataCheck11"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-circle">
-                                    <img class="avatar-img" src="assets\img\160x160\img8.jpg" alt="Image Description">
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Linda Bates</span>
-                                    <span class="d-block font-size-sm text-body">linda@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Unknown</span>
-                            <span class="d-block font-size-sm">Unknown</span>
-                        </td>
-                        <td>United Kingdom <span class="text-hide">Code: UK</span></td>
-                        <td>
-                            <span class="legend-indicator bg-danger"></span>Suspended
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">0%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck12">
-                                <label class="custom-control-label" for="usersDataCheck12"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-info avatar-circle">
-                                    <span class="avatar-initials">B</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Brian Halligan</span>
-                                    <span class="d-block font-size-sm text-body">brian@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Director</span>
-                            <span class="d-block font-size-sm">Accounting</span>
-                        </td>
-                        <td>France <span class="text-hide">Code: FR</span></td>
-                        <td>
-                            <span class="legend-indicator bg-success"></span>Active
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">71%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 71%" aria-valuenow="71" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck13">
-                                <label class="custom-control-label" for="usersDataCheck13"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-dark avatar-circle">
-                                    <span class="avatar-initials">C</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Chris Mathew</span>
-                                    <span class="d-block font-size-sm text-body">chris@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Developer</span>
-                            <span class="d-block font-size-sm">Mobile app</span>
-                        </td>
-                        <td>Switzerland <span class="text-hide">Code: CH</span></td>
-                        <td>
-                            <span class="legend-indicator bg-warning"></span>Pending
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">0%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck14">
-                                <label class="custom-control-label" for="usersDataCheck14"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-circle">
-                                    <img class="avatar-img" src="assets\img\160x160\img7.jpg" alt="Image Description">
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Clarice Boone <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
-                                    <span class="d-block font-size-sm text-body">clarice@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Seller</span>
-                            <span class="d-block font-size-sm">Branding products</span>
-                        </td>
-                        <td>United Kingdom <span class="text-hide">Code: UK</span></td>
-                        <td>
-                            <span class="legend-indicator bg-success"></span>Active
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">37%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck15">
-                                <label class="custom-control-label" for="usersDataCheck15"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-dark avatar-circle">
-                                    <span class="avatar-initials">L</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Lewis Clarke</span>
-                                    <span class="d-block font-size-sm text-body">lewis@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Co-founder</span>
-                            <span class="d-block font-size-sm">IT department</span>
-                        </td>
-                        <td>Switzerland <span class="text-hide">Code: CH</span></td>
-                        <td>
-                            <span class="legend-indicator bg-warning"></span>Pending
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">100%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Owner</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck8">
-                                <label class="custom-control-label" for="usersDataCheck8"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-circle">
-                                    <img class="avatar-img" src="assets\img\160x160\img4.jpg" alt="Image Description">
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Sam Kart</span>
-                                    <span class="d-block font-size-sm text-body">sam@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Designer</span>
-                            <span class="d-block font-size-sm">Branding</span>
-                        </td>
-                        <td>Canada <span class="text-hide">Code: CA</span></td>
-                        <td>
-                            <span class="legend-indicator bg-warning"></span>Pending
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">7%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 7%" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck17">
-                                <label class="custom-control-label" for="usersDataCheck17"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-danger avatar-circle">
-                                    <span class="avatar-initials">J</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Johnny Appleseed</span>
-                                    <span class="d-block font-size-sm text-body">johnny@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Accountant</span>
-                            <span class="d-block font-size-sm">Human resources</span>
-                        </td>
-                        <td>United States <span class="text-hide">Code: US</span></td>
-                        <td>
-                            <span class="legend-indicator bg-success"></span>Active
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">80%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck18">
-                                <label class="custom-control-label" for="usersDataCheck18"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-danger avatar-circle">
-                                    <span class="avatar-initials">P</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Phileas Fogg</span>
-                                    <span class="d-block font-size-sm text-body">phileas@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Designer</span>
-                            <span class="d-block font-size-sm">Branding</span>
-                        </td>
-                        <td>Spain <span class="text-hide">Code: ES</span></td>
-                        <td>
-                            <span class="legend-indicator bg-danger"></span>Suspended
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">46%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 46%" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck19">
-                                <label class="custom-control-label" for="usersDataCheck19"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-circle">
-                                    <img class="avatar-img" src="assets\img\160x160\img6.jpg" alt="Image Description">
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Mark Williams <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
-                                    <span class="d-block font-size-sm text-body">mark@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Co-founder</span>
-                            <span class="d-block font-size-sm">Branding</span>
-                        </td>
-                        <td>United Kingdom <span class="text-hide">Code: GB</span></td>
-                        <td>
-                            <span class="legend-indicator bg-success"></span>Active
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">100%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Owner</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck20">
-                                <label class="custom-control-label" for="usersDataCheck20"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-dark avatar-circle">
-                                    <span class="avatar-initials">T</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Timothy Silva</span>
-                                    <span class="d-block font-size-sm text-body">timothy@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Developer</span>
-                            <span class="d-block font-size-sm">Mobile app</span>
-                        </td>
-                        <td>Italy <span class="text-hide">Code: IT</span></td>
-                        <td>
-                            <span class="legend-indicator bg-warning"></span>Pending
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">12%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 12%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck21">
-                                <label class="custom-control-label" for="usersDataCheck21"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-dark avatar-circle">
-                                    <span class="avatar-initials">G</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Gary Bishop <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
-                                    <span class="d-block font-size-sm text-body">gary@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Developer</span>
-                            <span class="d-block font-size-sm">Mobile app</span>
-                        </td>
-                        <td>Latvia <span class="text-hide">Code: LV</span></td>
-                        <td>
-                            <span class="legend-indicator bg-success"></span>Active
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">50%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck22">
-                                <label class="custom-control-label" for="usersDataCheck22"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-dark avatar-circle">
-                                    <span class="avatar-initials">Y</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Yorker Scogings</span>
-                                    <span class="d-block font-size-sm text-body">yorker@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Seller</span>
-                            <span class="d-block font-size-sm">Branding products</span>
-                        </td>
-                        <td>Norway <span class="text-hide">Code: NO</span></td>
-                        <td>
-                            <span class="legend-indicator bg-danger"></span>Suspended
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">49%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 49%" aria-valuenow="49" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck23">
-                                <label class="custom-control-label" for="usersDataCheck23"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-info avatar-circle">
-                                    <span class="avatar-initials">F</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Frank Phillips</span>
-                                    <span class="d-block font-size-sm text-body">frank@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Unknown</span>
-                            <span class="d-block font-size-sm">Unknown</span>
-                        </td>
-                        <td>Norway <span class="text-hide">Code: NO</span></td>
-                        <td>
-                            <span class="legend-indicator bg-danger"></span>Suspended
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">3%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 3%" aria-valuenow="3" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="table-column-pr-0">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="usersDataCheck24">
-                                <label class="custom-control-label" for="usersDataCheck24"></label>
-                            </div>
-                        </td>
-                        <td class="table-column-pl-0">
-                            <a class="d-flex align-items-center" href="user-profile.html">
-                                <div class="avatar avatar-soft-primary avatar-circle">
-                                    <span class="avatar-initials">E</span>
-                                </div>
-                                <div class="ml-3">
-                                    <span class="d-block h5 text-hover-primary mb-0">Elizabeth Carter</span>
-                                    <span class="d-block font-size-sm text-body">eliz@example.com</span>
-                                </div>
-                            </a>
-                        </td>
-                        <td>
-                            <span class="d-block h5 mb-0">Unknown</span>
-                            <span class="d-block font-size-sm">Unknown</span>
-                        </td>
-                        <td>United States <span class="text-hide">Code: UK</span></td>
-                        <td>
-                            <span class="legend-indicator bg-warning"></span>Pending
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="font-size-sm mr-2">95%</span>
-                                <div class="progress table-progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Employee</td>
-                        <td>
-                            <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                <i class="tio-edit"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -1622,7 +621,7 @@
                 <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
                     <div class="col-sm mb-2 mb-sm-0">
                         <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
-                            <span class="mr-2">Showing:</span>
+                            <span class="mr-2">Trang:</span>
 
                             <!-- Select -->
                             <select id="datatableEntries" class="js-select2-custom" data-hs-select2-options='{
@@ -1661,49 +660,6 @@
 
     <!-- Footer -->
 
-    <div class="footer">
-        <div class="row justify-content-between align-items-center">
-            <div class="col">
-                <p class="font-size-sm mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2020 Htmlstream.</span></p>
-            </div>
-            <div class="col-auto">
-                <div class="d-flex justify-content-end">
-                    <!-- List Dot -->
-                    <ul class="list-inline list-separator">
-                        <li class="list-inline-item">
-                            <a class="list-separator-link" href="#">FAQ</a>
-                        </li>
-
-                        <li class="list-inline-item">
-                            <a class="list-separator-link" href="#">License</a>
-                        </li>
-
-                        <li class="list-inline-item">
-                            <!-- Keyboard Shortcuts Toggle -->
-                            <div class="hs-unfold">
-                                <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;" data-hs-unfold-options='{
-                              "target": "#keyboardShortcutsSidebar",
-                              "type": "css-animation",
-                              "animationIn": "fadeInRight",
-                              "animationOut": "fadeOutRight",
-                              "hasOverlay": true,
-                              "smartPositionOff": true
-                             }'>
-                                    <i class="tio-command-key"></i>
-                                </a>
-                            </div>
-                            <!-- End Keyboard Shortcuts Toggle -->
-                        </li>
-                    </ul>
-                    <!-- End List Dot -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- End Footer -->
 </main>
 
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -13,7 +14,10 @@ class UserController extends Controller
 {
     public function show_list_user()
 {
-    return view('page.user.list');
+    $user = User::all();
+    $userCount = User::count();
+    $activeUserCount = DB::table('users')->where('status', 1)->count();
+    return view('page.user.list',['user'=>$user,'userCount'=>$userCount,'activeUserCount'=>$activeUserCount]);
 }
     public function show_add_user()
 {
@@ -53,6 +57,6 @@ class UserController extends Controller
         }
         return redirect()->back()->with('false_Register', 'Đăng ký không thành công');
     }
-    
+
 }
 

@@ -11,16 +11,17 @@
                             <ol class="breadcrumb breadcrumb-no-gutter">
                                 <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Trang</a></li>
                                 <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Thuộc tính</a></li>
+                                <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Thuộc tính</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Danh sách</li>
                             </ol>
                         </nav>
 
-                        <h1 class="page-header-title">Thuộc tính</h1>
+                        <h1 class="page-header-title"></h1>
                     </div>
 
                     <div class="col-sm-auto">
-                        <a class="btn btn-primary" href="users-add-user.html">
-                            <i class="tio-user-add mr-1"></i> Thêm thuộc tính
+                        <a class="btn btn-primary" href="{{route('show_add_value.index',['id' => $attribute->id])}}">
+                            <i class="tio-user-add mr-1"></i> Thêm giá trị thuộc tính
                         </a>
                     </div>
                 </div>
@@ -33,11 +34,11 @@
                     <!-- Card -->
                     <div class="card h-100">
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2">Tổng số thuộc tính</h6>
+                            <h6 class="card-subtitle mb-2">Tổng số giá trị thuộc tính</h6>
 
                             <div class="row align-items-center gx-2">
                                 <div class="col">
-                                    <span class="js-counter display-4 text-dark">{{$attributeCount}}</span>
+                                    <span class="js-counter display-4 text-dark"></span>
 
                                 </div>
 
@@ -57,12 +58,12 @@
                     <!-- Card -->
                     <div class="card h-100">
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2">Thuộc tính đang hoạt động</h6>
+                            <h6 class="card-subtitle mb-2">Giá trị thuộc tính đang hoạt động</h6>
 
                             <div class="row align-items-center gx-2">
                                 <div class="col">
-                                    <span class="js-counter display-4 text-dark">{{$activeAttributeCount}}</span>
-                                    <span class="text-body font-size-sm ml-1">từ {{$attributeCount}}</span>
+                                    <span class="js-counter display-4 text-dark"></span>
+                                    <span class="text-body font-size-sm ml-1">từ </span>
                                 </div>
                                 <div class="col-auto">
                                     <span class="badge badge-soft-success p-1">
@@ -287,7 +288,7 @@
                     </thead>
 
                     <tbody>
-                    @foreach($attribute as $key=>$val)
+                    @foreach($attribute->attribute_values as $val )
                         <tr>
                             <td class="table-column-pr-0">
                                 <div class="custom-control custom-checkbox">
@@ -295,7 +296,7 @@
                                     <label class="custom-control-label" for="usersDataCheck1"></label>
                                 </div>
                             </td>
-                            <td>{{ $val ? $val->name : '' }}<span class="text-hide">Code: GB</span></td>
+                            <td>{{ $val ? $val->value : '' }}<span class="text-hide">Code: GB</span></td>
                             <td>
                                 @if ($val->active == 0)
                                     <span class="legend-indicator bg-danger"></span>Chưa hoạt động
@@ -305,9 +306,7 @@
                             </td>
 
                             <td>
-                                <a class="btn btn-sm btn-white" href="{{route('show_list_value.index',$val->id)}}" >
-                                    <i class="tio-more-horizontal"></i>
-                                </a>
+
                                 <a class="btn btn-sm btn-white" href="" >
                                     <i class="tio-edit"></i>
                                 </a>
@@ -370,5 +369,4 @@
         <!-- Footer -->
 
     </main>
-
 @endsection

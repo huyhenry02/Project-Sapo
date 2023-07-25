@@ -11,6 +11,7 @@ class Attribute extends Model
     protected $table='attributes';
     public function attribute_values()
     {
-        return $this->hasMany(Attribute_value::class);
+        return $this->hasMany(Attribute_value::class,'attribute_parent_id', 'id');
     }
 }
+
