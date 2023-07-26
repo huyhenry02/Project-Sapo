@@ -29,4 +29,14 @@ class Attribute_ValueController extends Controller
         }
         return redirect()->route('show_list_value.index',['id'=>$attributeId]);
     }
+    public function destroy($id)
+    {
+        $attributeValue = Attribute_value::find($id);
+        if (!$attributeValue) {
+            return redirect()->route('show_list_value.index')->with('error', 'Không tìm thấy giá trị thuộc tính!');
+        }
+        $attributeValue->delete();
+        return redirect()->route('show_list_value.index')->with('success', 'Giá trị thuộc tính đã được xóa thành công!');
+    }
+
 }

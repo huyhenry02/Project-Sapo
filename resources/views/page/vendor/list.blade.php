@@ -305,15 +305,12 @@
                             </td>
 
                             <td>
-                                <div id="editUserPopover" data-toggle="popover-dark" data-placement="left" title="<div class='d-flex align-items-center'>Edit user <a href='#!' class='close close-light ml-auto'><i id='closeEditUserPopover' class='tio-clear'></i></a></div>" data-content="Check out this Edit user modal example."
-                                     data-html="true">
-                                    <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                        <i class="tio-edit"></i>
-                                    </a>
-                                    <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                        <i class="tio-delete"></i>
-                                    </a>
-                                </div>
+                                <a class="btn btn-sm btn-white" href="" >
+                                    <i class="tio-edit"></i>
+                                </a>
+                                <a class="btn btn-sm btn-white" href="{{route('vendor.delete',$val->id)}}" >
+                                    <i class="tio-delete"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

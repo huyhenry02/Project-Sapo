@@ -31,4 +31,13 @@ class VendorController extends Controller
         $vendor->save();
         return redirect()->route('show_list_vendor.index');
     }
+    public function destroy($id)
+    {
+        $vendor = Vendor::find($id);
+        if (!$vendor) {
+            return redirect()->route('show_list_vendor.index')->with('error', 'Không tìm thấy danh mục!');
+        }
+        $vendor->delete();
+        return redirect()->route('show_list_vendor.index')->with('success', 'Danh mục đã được xóa thành công!');
+    }
 }

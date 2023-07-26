@@ -16,10 +16,9 @@
                 <!-- Card -->
                 <div class="card">
                     <!-- Body -->
-<form method="post" action="{{route('add_brand.post')}}">
+            <form method="post" action="{{route('add_brand.post')}}">
     @csrf
     <div class="card-body">
-
         <div class="form-group">
             <label for="addresszipCodeLabel" class="input-label">Tên thương hiệu <i class="tio-help-outlined text-body ml-1" data-toggle="tooltip" data-placement="top" title="You can find your code in a postal address."></i></label>
 

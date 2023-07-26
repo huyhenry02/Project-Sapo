@@ -31,4 +31,13 @@ class AttributeController extends Controller
         $attribute->save();
         return redirect()->route('show_list_attribute.index');
     }
+    public function destroy($id)
+    {
+        $attribute = Attribute::find($id);
+        if (!$attribute) {
+            return redirect()->route('show_list_attribute.index')->with('error', 'Không tìm thấy thuộc tính!');
+        }
+        $attribute->delete();
+        return redirect()->route('show_list_attribute.index')->with('success', 'Thuộc tính đã được xóa thành công!');
+    }
 }

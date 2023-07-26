@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="col-sm-auto">
-                        <a class="btn btn-primary" href="users-add-user.html">
+                        <a class="btn btn-primary" href="{{route('show_add_brand.index')}}">
                             <i class="tio-user-add mr-1"></i> Thêm thương hiệu
                         </a>
                     </div>
@@ -305,15 +305,12 @@
                             </td>
 
                             <td>
-                                <div id="editUserPopover" data-toggle="popover-dark" data-placement="left" title="<div class='d-flex align-items-center'>Edit user <a href='#!' class='close close-light ml-auto'><i id='closeEditUserPopover' class='tio-clear'></i></a></div>" data-content="Check out this Edit user modal example."
-                                     data-html="true">
-                                    <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                        <i class="tio-edit"></i>
-                                    </a>
-                                    <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
-                                        <i class="tio-delete"></i>
-                                    </a>
-                                </div>
+                                <a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
+                                    <i class="tio-edit"></i>
+                                </a>
+                                <a class="btn btn-sm btn-white" href="{{route('brand.delete',$val->id)}}">
+                                    <i class="tio-delete"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

@@ -31,4 +31,13 @@ class BrandController extends Controller
         $brand->save();
         return redirect()->route('show_list_brand.index');
     }
+    public function destroy($id)
+    {
+        $brand = Brand::find($id);
+        if (!$brand) {
+            return redirect()->route('show_list_brand.index')->with('error', 'Không tìm thấy thương hiệu!');
+        }
+        $brand->delete();
+        return redirect()->route('show_list_brand.index')->with('success', 'Thương hiệu đã được xóa thành công!');
+    }
 }

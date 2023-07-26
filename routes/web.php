@@ -61,12 +61,18 @@ Route::prefix('page')->group(function () {
         Route::get('/show_edit_brand', [BrandController::class, 'show_edit_brand'])->name('show_edit_brand.index');
         //post
         Route::post('/add_brand', [BrandController::class, 'add'])->name('add_brand.post');
+        Route::get('/delete_brand/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
     });
     //Category
     Route::prefix('category')->group(function (){
+        //show
         Route::get('/show_list_category', [CategoryController::class, 'show_list_category'])->name('show_list_category.index');
         Route::get('/show_add_category', [CategoryController::class, 'show_add_category'])->name('show_add_category.index');
         Route::get('/show_edit_category', [CategoryController::class, 'show_edit_category'])->name('show_edit_category.index');
+
+        //post
+        Route::post('/add_category', [CategoryController::class, 'add'])->name('add_category.post');
+        Route::get('/delete_category/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
     });
     //Company
     Route::prefix('company')->group(function (){
@@ -93,6 +99,7 @@ Route::prefix('page')->group(function () {
         Route::get('/show_edit_vendor', [VendorController::class, 'show_edit_vendor'])->name('show_edit_vendor.index');
         //post
         Route::post('/add_vendor', [VendorController::class, 'add'])->name('add_vendor.post');
+        Route::get('/delete_vendor/{id}', [VendorController::class, 'destroy'])->name('vendor.delete');
     });
     //Attribute
     Route::prefix('attribute')->group(function (){
@@ -103,6 +110,7 @@ Route::prefix('page')->group(function () {
 
         //post
         Route::post('/add_attribute', [AttributeController::class, 'add'])->name('add_attribute.post');
+        Route::get('/delete_attribute/{id}', [AttributeController::class, 'destroy'])->name('attribute.delete');
 
         //show attribute value
         Route::get('/show_list_value/{id}', [Attribute_ValueController::class, 'show_list_value'])->name('show_list_value.index');
@@ -111,6 +119,7 @@ Route::prefix('page')->group(function () {
 
         //post_value
         Route::post('/add_attribute_value/{attributeId}', [Attribute_ValueController::class, 'add_value'])->name('add_attribute_value.post');
+        Route::get('/delete_attribute_value/{attributeId}', [Attribute_ValueController::class, 'destroy'])->name('attribute_value.delete');
 
     });
 });
