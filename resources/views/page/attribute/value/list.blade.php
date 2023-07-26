@@ -282,7 +282,7 @@
                             </div>
                         </th>
                         <th>Tên thuộc tính</th>
-                        <th>Trạng thái</th>
+
                         <th></th>
                     </tr>
                     </thead>
@@ -297,13 +297,7 @@
                                 </div>
                             </td>
                             <td>{{ $val ? $val->value : '' }}<span class="text-hide">Code: GB</span></td>
-                            <td>
-                                @if ($val->active == 0)
-                                    <span class="legend-indicator bg-danger"></span>Chưa hoạt động
-                                @elseif ($val->active == 1)
-                                    <span class="legend-indicator bg-success"></span>Đang hoạt động
-                                @endif
-                            </td>
+
 
                             <td>
 

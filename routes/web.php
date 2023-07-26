@@ -62,7 +62,6 @@ Route::prefix('page')->group(function () {
         //post
         Route::post('/add_brand', [BrandController::class, 'add'])->name('add_brand.post');
     });
-
     //Category
     Route::prefix('category')->group(function (){
         Route::get('/show_list_category', [CategoryController::class, 'show_list_category'])->name('show_list_category.index');
@@ -107,11 +106,12 @@ Route::prefix('page')->group(function () {
 
         //show attribute value
         Route::get('/show_list_value/{id}', [Attribute_ValueController::class, 'show_list_value'])->name('show_list_value.index');
-        Route::get('/show_add_value', [Attribute_ValueController::class, 'show_add_value'])->name('show_add_value.index');
+        Route::get('/show_add_value/{id}', [Attribute_ValueController::class, 'show_add_value'])->name('show_add_value.index');
         Route::get('/show_edit_value', [Attribute_ValueController::class, 'show_edit_value'])->name('show_edit_value.index');
 
         //post_value
         Route::post('/add_attribute_value/{attributeId}', [Attribute_ValueController::class, 'add_value'])->name('add_attribute_value.post');
+
     });
 });
 

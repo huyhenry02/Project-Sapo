@@ -14,7 +14,7 @@
                 <!-- Card -->
                 <div class="card">
                     <!-- Body -->
-                    <form method="post" action="{{route('add_attribute_value.post', [['attributeId' => $attribute->id]])}}">
+                    <form method="post" action="{{route('add_attribute_value.post', ['attributeId' => $attribute->id])}}">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
