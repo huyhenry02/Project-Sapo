@@ -282,11 +282,9 @@
                             </div>
                         </th>
                         <th>Tên thuộc tính</th>
-
                         <th></th>
                     </tr>
                     </thead>
-
                     <tbody>
                     @foreach($attribute->attribute_values as $val )
                         <tr>

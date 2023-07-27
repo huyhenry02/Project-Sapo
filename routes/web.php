@@ -87,9 +87,13 @@ Route::prefix('page')->group(function () {
     });
     //Product
     Route::prefix('product')->group(function (){
+        //show
         Route::get('/show_list_product', [ProductController::class, 'show_list_product'])->name('show_list_product.index');
         Route::get('/show_add_product', [ProductController::class, 'show_add_product'])->name('show_add_product.index');
         Route::get('/show_edit_product', [ProductController::class, 'show_edit_product'])->name('show_edit_product.index');
+
+        //post
+        Route::post('/add_product', [ProductController::class, 'add'])->name('add_product.post');
     });
     //Vendor
     Route::prefix('vendor')->group(function (){

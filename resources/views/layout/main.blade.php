@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="favicon.ico">
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- CSS Implementing Plugins -->
     <link rel="stylesheet" href="/frontend/assets\css\vendor.min.css">
     <link rel="stylesheet" href="/frontend/assets\vendor\icon-set\style.css">
@@ -21,7 +22,7 @@
 
 <body class="footer-offset">
 
-<script src="/frontend/assets\vendor\hs-navbar-vertical-aside\hs-navbar-vertical-aside-mini-cache.js"></script>
+<script src="{{asset('/frontend/assets\vendor\hs-navbar-vertical-aside\hs-navbar-vertical-aside-mini-cache.js')}}"></script>
 
 
 <!-- ONLY DEV -->
@@ -35,7 +36,7 @@
 
 <!-- End Header -->
 @include('layout.menubar')
-<script src="/frontend/assets\js\demo.js"></script>
+<script src="{{asset('/frontend/assets\js\demo.js')}}"></script>
 <!-- END ONLY DEV -->
 <!-- Search Form -->
 @include('layout.search')
@@ -54,15 +55,15 @@
 @include('layout.keyboard')
 <!-- End Keyboard Shortcuts -->
 <!-- JS Implementing Plugins -->
-<script src="/frontend/assets\js\vendor.min.js"></script>
-<script src="/frontend/assets\vendor\chart.js\dist\Chart.min.js"></script>
-<script src="/frontend/assets\vendor\chart.js.extensions\chartjs-extensions.js"></script>
-<script src="/frontend/assets\vendor\chartjs-plugin-datalabels\dist\chartjs-plugin-datalabels.min.js"></script>
+<script src="{{asset('/frontend/assets\js\vendor.min.js')}}"></script>
+<script src="{{asset('/frontend/assets\vendor\chart.js\dist\Chart.min.js')}}"></script>
+<script src="{{assert('/frontend/assets\vendor\chart.js.extensions\chartjs-extensions.js')}}"></script>
+<script src="{{asset('/frontend/assets\vendor\chartjs-plugin-datalabels\dist\chartjs-plugin-datalabels.min.js')}}"></script>
 
 
 
 <!-- JS Front -->
-<script src="/frontend/assets\js\theme.min.js"></script>
+<script src="{{asset('/frontend/assets\js\theme.min.js')}}"></script>
 
 <!-- JS Plugins Init. -->
 <script>
@@ -328,7 +329,7 @@
 
 <!-- IE Support -->
 <script>
-    if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="/frontend/assets/vendor/babel-polyfill/polyfill.min.js"><\/script>');
+    if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{asset('/frontend/assets/vendor/babel-polyfill/polyfill.min.js')}}"><\/script>');
 </script>
 </body>
 
