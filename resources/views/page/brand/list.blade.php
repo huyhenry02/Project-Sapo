@@ -285,7 +285,6 @@
                         <th></th>
                     </tr>
                     </thead>
-
                     <tbody>
                     @foreach($brand as $key=>$val)
                         <tr>

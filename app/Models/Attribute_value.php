@@ -9,9 +9,9 @@ class Attribute_value extends Model
 {
     use HasFactory;
     protected $table='attribute_values';
-    public function product()
+    public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(Product::class);
     }
     public function attribute()
     {

@@ -268,11 +268,13 @@
                             <th>Giá</th>
                             <th>Số lượng</th>
                             <th>Thuộc tính</th>
+                            <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
                         </thead>
 
                         <tbody>
+                        @foreach($product as $key=>$val)
                         <tr>
                             <td class="table-column-pr-0">
                                 <div class="custom-control custom-checkbox">
@@ -281,20 +283,27 @@
                                 </div>
                             </td>
                             <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="ecommerce-product-details.html">
-                                    <img class="avatar avatar-lg mr-3" src="/frontend/assets\img\400x400\img4.jpg" alt="Image Description">
+                                <a class="media align-items-center" href="">
+                                    <img class="avatar avatar-lg mr-3" src="{{asset($val->image)}}" alt="Image Description">
                                     <div class="media-body">
-                                        <h5 class="text-hover-primary mb-0">Photive wireless speakers</h5>
+                                        <h5 class="text-hover-primary mb-0">{{ $val ? $val->name : '' }}</h5>
                                     </div>
                                 </a>
                             </td>
-                            <td>Electronics</td>
-                            <td>Google     </td>
-                            <td>           </td>
-                            <td>2384741241 </td>
-                            <td>$65        </td>
-                            <td>60         </td>
-                            <td>2          </td>
+                            <td>{{ $val ? $val->category->name : '' }}</td>
+                            <td>{{ $val ? $val->vendor->name : '' }}</td>
+                            <td>{{ $val ? $val->brand->name : '' }}</td>
+                            <td>{{ $val ? $val->sku : '' }} </td>
+                            <td>{{ $val ? $val->price : '' }} </td>
+                            <td>{{ $val ? $val->qty : '' }}</td>
+                            <td>{{ $val ? $val->attribute_value->value : '' }}</td>
+                            <td>
+                                @if ($val->availability == 0)
+                                    <span class="legend-indicator bg-danger"></span>Hết hàng
+                                @elseif ($val->availability == 1)
+                                    <span class="legend-indicator bg-success"></span>Còn hàng
+                                @endif
+                            </td>
                             <td>
                                 <div class="btn-group" role="group">
                                     <a class="btn btn-sm btn-white" href="" >
@@ -310,7 +319,7 @@
                             </td>
                         </tr>
 
-
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

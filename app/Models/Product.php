@@ -21,9 +21,9 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class);
     }
-    public function attribute_values()
+    public function attribute_value()
     {
-        return $this->hasMany(Attribute_value::class);
+        return $this->belongsTo(Attribute_value::class);
     }
     public function order_details()
     {
