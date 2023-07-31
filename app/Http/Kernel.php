@@ -55,6 +55,12 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
+
+        'can_view_all' => \Illuminate\Auth\Middleware\Authorize::class. ':view-all',
+        'can_view_product_order_attribute' => \Illuminate\Auth\Middleware\Authorize::class. ':view-product-order-attribute',
+        'can_view_attribute_category_vendor_category_brand' => \Illuminate\Auth\Middleware\Authorize::class. ':view-attribute-category-vendor-category-brand',
+        'can_view_statistic_company' => \Illuminate\Auth\Middleware\Authorize::class. ':view-statistic-company',
+
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,

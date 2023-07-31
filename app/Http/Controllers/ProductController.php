@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -33,38 +34,54 @@ class ProductController extends Controller
         return view('page.product.edit');
     }
     public function add(Request $request)
-    {
-        try {
-            $validateProduct = $request->validate([
-                'name' => 'required|string|max:255',
-                'sku' => 'required|string|max:50',
-                'price' => 'required|numeric|min:0',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'description' => 'nullable|string',
-                'attribute_value_id' => 'exists:attribute_values,id',
-                'brand_id' => 'required|exists:brands,id',
-                'category_id' => 'required|exists:categories,id',
-                'vendor_id' => 'required|exists:vendors,id',
-                'availability' => 'nullable|boolean',
-            ]);
-            $availability = $request->has('availability');
-            $imagePath = $request->file('image')->store('products','public');
-            $product = new Product();
-            $product->name = $validateProduct['name'];
-            $product->sku = $validateProduct['sku'];
-            $product->price = $validateProduct['price'];
-            $product->image = $imagePath;
-            $product->description  = $validateProduct['description'];
-            $product->attribute_value_id  = $validateProduct['attribute_value_id'];
-            $product->brand_id  = $validateProduct['brand_id'];
-            $product->category_id  = $validateProduct['category_id'];
-            $product->vendor_id  = $validateProduct['vendor_id'];
-            $product->availability  = $availability;
-            $product->save();
-
-            return redirect()->route('show_list_product.index');
-        } catch (\Exception $e) {
-            dd($e->getMessage()); // In ra thông báo lỗi để xác định nguyên nhân
+{
+//    DB::beginTransaction();
+    try {
+        $validateProduct = $request->validate([
+            'name' => 'required|string|max:255',
+            'sku' => 'required|string|max:50',
+            'price' => 'required|numeric|min:0',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'nullable|string',
+            'attribute_value_id' => 'exists:attribute_values,id',
+            'brand_id' => 'required|exists:brands,id',
+            'category_id' => 'required|exists:categories,id',
+            'vendor_id' => 'required|exists:vendors,id',
+            'availability' => 'nullable|boolean',
+        ]);
+        $availability = $request->has('availability');
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image');
+            $filename = time() . '_' . $imagePath->getClientOriginalName();
+            $path_upload = 'uploads/product/';
+            $request->file('image')->move($path_upload, $filename);
         }
+        $product = new Product();
+        $product->name = $validateProduct['name'];
+        $product->sku = $validateProduct['sku'];
+        $product->price = $validateProduct['price'];
+        $product->image = $path_upload . $filename;
+        $product->description  = $validateProduct['description'];
+        $product->attribute_value_id  = $validateProduct['attribute_value_id'];
+        $product->brand_id  = $validateProduct['brand_id'];
+        $product->category_id  = $validateProduct['category_id'];
+        $product->vendor_id  = $validateProduct['vendor_id'];
+        $product->availability  = $availability;
+        $product->save();
+        return redirect()->route('show_list_product.index');
+
+    } catch (\Exception $e) {
+//        DB::rollBack();
+        dd($e->getMessage());
+    }
 }
+    public function destroy($id){
+        $product = Product::find($id);
+        if (!$product) {
+            return redirect()->route('show_list_product.index')->with('error', 'Không tìm thấy sản phẩm !');
+        }
+        $product->delete();
+        return redirect()->route('show_list_product.index')->with('success', 'Sản phẩm đã được xóa thành công!');
+
+    }
 }

@@ -13,9 +13,10 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\Attribute_ValueController;
+use App\Http\Controllers\RoleController;
 
 Route::get('/', function () {
-    return view('layout.main');
+    return redirect()->route('show_login.index');
 });
 //login
 Route::prefix('auth_login')->group(function () {
@@ -30,7 +31,7 @@ Route::prefix('auth_login')->group(function () {
 
 });
 //Page
-Route::prefix('page')->group(function () {
+Route::prefix('page')->middleware(['auth','can_view_all'])->group(function () {
     //Dashboard
     Route::prefix('dashboard')->group(function (){
         Route::get('/default', [DashboardController::class, 'show_default'])->name('show_default.index');
@@ -49,12 +50,12 @@ Route::prefix('page')->group(function () {
 
     });
     //Statistic
-    Route::prefix('statistic')->group(function (){
+    Route::prefix('statistic')->middleware(['can_view_statistic_company'])->group(function (){
         Route::get('/show_statistic_order', [StatisticController::class, 'show_statistic_order'])->name('show_statistic_order.index');
         Route::get('/show_statistic_revenue', [StatisticController::class, 'show_statistic_revenue'])->name('show_statistic_revenue.index');
     });
     //Brand
-    Route::prefix('brand')->group(function (){
+    Route::prefix('brand')->middleware(['can_view_attribute_category_vendor_category_brand'])->group(function (){
         //show
         Route::get('/show_list_brand', [BrandController::class, 'show_list_brand'])->name('show_list_brand.index');
         Route::get('/show_add_brand', [BrandController::class, 'show_add_brand'])->name('show_add_brand.index');
@@ -64,7 +65,7 @@ Route::prefix('page')->group(function () {
         Route::get('/delete_brand/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
     });
     //Category
-    Route::prefix('category')->group(function (){
+    Route::prefix('category')->middleware(['can_view_attribute_category_vendor_category_brand'])->group(function (){
         //show
         Route::get('/show_list_category', [CategoryController::class, 'show_list_category'])->name('show_list_category.index');
         Route::get('/show_add_category', [CategoryController::class, 'show_add_category'])->name('show_add_category.index');
@@ -75,18 +76,18 @@ Route::prefix('page')->group(function () {
         Route::get('/delete_category/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
     });
     //Company
-    Route::prefix('company')->group(function (){
+    Route::prefix('company')->middleware(['can_view_statistic_company'])->group(function (){
         Route::get('/show_list_company', [CompanyController::class, 'show_list_company'])->name('show_list_company.index');
         Route::get('/show_add_company', [CompanyController::class, 'show_add_company'])->name('show_add_company.index');
     });
     //Order
-    Route::prefix('order')->group(function (){
+    Route::prefix('order')->middleware(['can_view_product_order_attribute'])->group(function (){
         Route::get('/show_list_order', [OrderController::class, 'show_list_order'])->name('show_list_order.index');
         Route::get('/show_add_order', [OrderController::class, 'show_add_order'])->name('show_add_order.index');
         Route::get('/show_edit_order', [OrderController::class, 'show_edit_order'])->name('show_edit_order.index');
     });
     //Product
-    Route::prefix('product')->group(function (){
+    Route::prefix('product')->middleware(['can_view_product_order_attribute'])->group(function (){
         //show
         Route::get('/show_list_product', [ProductController::class, 'show_list_product'])->name('show_list_product.index');
         Route::get('/show_add_product', [ProductController::class, 'show_add_product'])->name('show_add_product.index');
@@ -94,9 +95,10 @@ Route::prefix('page')->group(function () {
 
         //post
         Route::post('/add_product', [ProductController::class, 'add'])->name('add_product.post');
+        Route::get('/delete_product/{id}', [ProductController::class, 'destroy'])->name('product.delete');
     });
     //Vendor
-    Route::prefix('vendor')->group(function (){
+    Route::prefix('vendor')->middleware(['can_view_attribute_category_vendor_category_brand'])->group(function (){
         //show
         Route::get('/show_list_vendor', [VendorController::class, 'show_list_vendor'])->name('show_list_vendor.index');
         Route::get('/show_add_vendor', [VendorController::class, 'show_add_vendor'])->name('show_add_vendor.index');
@@ -106,7 +108,7 @@ Route::prefix('page')->group(function () {
         Route::get('/delete_vendor/{id}', [VendorController::class, 'destroy'])->name('vendor.delete');
     });
     //Attribute
-    Route::prefix('attribute')->group(function (){
+    Route::prefix('attribute')->middleware(['can_view_product_order_attribute','can_view_attribute_category_vendor_category_brand'])->group(function (){
         //show
         Route::get('/show_list_attribute', [AttributeController::class, 'show_list_attribute'])->name('show_list_attribute.index');
         Route::get('/show_add_attribute', [AttributeController::class, 'show_add_attribute'])->name('show_add_attribute.index');
@@ -125,6 +127,16 @@ Route::prefix('page')->group(function () {
         Route::post('/add_attribute_value/{attributeId}', [Attribute_ValueController::class, 'add_value'])->name('add_attribute_value.post');
         Route::get('/delete_attribute_value/{attributeId}', [Attribute_ValueController::class, 'destroy'])->name('attribute_value.delete');
 
+    });
+    //Vendor
+    Route::prefix('role')->group(function (){
+        //show
+        Route::get('/show_list_role', [RoleController::class, 'show_list_role'])->name('show_list_role.index');
+        Route::get('/show_add_role', [RoleController::class, 'show_add_role'])->name('show_add_role.index');
+        Route::get('/show_edit_role', [RoleController::class, 'show_edit_role'])->name('show_edit_role.index');
+        //post
+        Route::post('/add_role', [RoleController::class, 'add'])->name('add_role.post');
+        Route::get('/delete_role/{id}', [RoleController::class, 'destroy'])->name('role.delete');
     });
 });
 

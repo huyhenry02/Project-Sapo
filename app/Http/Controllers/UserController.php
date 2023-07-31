@@ -36,6 +36,12 @@ class UserController extends Controller
             'password.require'=>'Vui lòng nhập mật khẩu',
             'email.required'=>'Vui lòng nhập email'
         ]);
+        if ($request->hasFile('avatar')) {
+            $imagePath = $request->file('avatar');
+            $filename = time() . '_' . $imagePath->getClientOriginalName();
+            $path_upload = 'uploads/users/';
+            $request->file('avatar')->move($path_upload, $filename);
+        }
         $data = $request->only('username','email','password','firstname','lastname','phone','gender');
         $user = new User();
         $user->username = $data['username'];
@@ -44,6 +50,7 @@ class UserController extends Controller
         $user->phone = $data['phone'];
         $user->gender = $data['gender'];
         $user->email = $data['email'];
+        $user->avatar =$path_upload . $filename;
         $user->password = Hash::make($data['password']); // Sử dụng Hash::make() để băm mật khẩu
         $user->save();
         $accessToken = $user->createToken('authToken')->accessToken;
@@ -57,6 +64,5 @@ class UserController extends Controller
         }
         return redirect()->back()->with('false_Register', 'Đăng ký không thành công');
     }
-
 }
 

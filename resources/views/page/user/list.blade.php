@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="col-sm-auto">
-                    <a class="btn btn-primary" href="users-add-user.html">
+                    <a class="btn btn-primary" href="{{route('show_add_user.index')}}">
                         <i class="tio-user-add mr-1"></i> Thêm người dùng
                     </a>
                 </div>
@@ -566,7 +566,7 @@
                         <td class="table-column-pl-0">
                             <a class="d-flex align-items-center" href="user-profile.html">
                                 <div class="avatar avatar-circle">
-                                    <img class="avatar-img" src="{{ $val ? $val->avatar  : '' }}" alt="Image Description">
+                                    <img class="avatar-img" src="{{asset($val->avatar)}}" alt="Image Description">
                                 </div>
                                 <div class="ml-3">
                                     <span class="d-block h5 text-hover-primary mb-0">{{ $val ? $val->firstname : '' }} {{ $val ? $val->lastname : '' }} <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
@@ -594,7 +594,9 @@
                             @endif
                         </td>
 
-                        <td>Khách hàng</td>
+                        <td> @foreach ($val->roles as $role)
+                                {{ $role->role_name }}<br>
+                            @endforeach</td>
                         <td>
                             <div id="editUserPopover" data-toggle="popover-dark" data-placement="left" title="<div class='d-flex align-items-center'>Edit user <a href='#!' class='close close-light ml-auto'><i id='closeEditUserPopover' class='tio-clear'></i></a></div>" data-content="Check out this Edit user modal example."
                                  data-html="true">

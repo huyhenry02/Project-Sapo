@@ -9,8 +9,8 @@ class Role extends Model
 {
     use HasFactory;
     protected $table='roles';
-    public function roles()
+    public function users()
     {
-        return $this->hasMany(Role::class);
+        return $this->belongsToMany(User::class, 'role_user','role_id','user_id');
     }
 }
