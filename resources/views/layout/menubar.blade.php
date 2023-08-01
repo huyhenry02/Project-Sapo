@@ -82,6 +82,42 @@
                             </ul>
                         </li>
                         <!-- End User -->
+                        <!-- Customer -->
+                        <li class="navbar-vertical-aside-has-menu ">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Pages">
+                                <i class="tio-pages-outlined nav-icon"></i>
+                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Khách hàng</span>
+                            </a>
+
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
+
+                                <li class="nav-item">
+                                    <a class="nav-link " href="{{route('show_list_customer.index')}}" title="Referrals">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">Danh sách</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="{{route('show_add_customer.index')}}" title="Referrals">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">Thêm khách hàng</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="{{route('show_edit_customer.index')}}" title="Referrals">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">Cập nhật khách hàng</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="{{route('show_profile_customer.index')}}" title="Referrals">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">Chi tiết thông tin</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End Customer -->
                         <li class="navbar-vertical-aside-has-menu ">
                             <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Pages">
                                 <i class="tio-pages-outlined nav-icon"></i>

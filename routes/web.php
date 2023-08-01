@@ -14,6 +14,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\Attribute_ValueController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return redirect()->route('show_login.index');
@@ -31,7 +32,7 @@ Route::prefix('auth_login')->group(function () {
 
 });
 //Page
-Route::prefix('page')->middleware(['auth','can_view_all'])->group(function () {
+Route::prefix('page')->middleware(['auth'])->group(function () {
     //Dashboard
     Route::prefix('dashboard')->group(function (){
         Route::get('/default', [DashboardController::class, 'show_default'])->name('show_default.index');
@@ -49,13 +50,24 @@ Route::prefix('page')->middleware(['auth','can_view_all'])->group(function () {
         Route::post('/add_user', [UserController::class, 'add_user'])->name('add_user.post');
 
     });
+    Route::prefix('customer')->group(function (){
+        // show
+        Route::get('/show_list_customer', [CustomerController::class, 'show_list_customer'])->name('show_list_customer.index');
+        Route::get('/show_add_customer', [CustomerController::class, 'show_add_customer'])->name('show_add_customer.index');
+        Route::get('/show_edit_customer', [CustomerController::class, 'show_edit_customer'])->name('show_edit_customer.index');
+        Route::get('/show_profile_customer', [CustomerController::class, 'show_profile_customer'])->name('show_profile_customer.index');
+
+        //post
+        Route::post('/add_customer', [CustomerController::class, 'add_customer'])->name('add_customer.post');
+
+    });
     //Statistic
-    Route::prefix('statistic')->middleware(['can_view_statistic_company'])->group(function (){
+    Route::prefix('statistic')->group(function (){
         Route::get('/show_statistic_order', [StatisticController::class, 'show_statistic_order'])->name('show_statistic_order.index');
         Route::get('/show_statistic_revenue', [StatisticController::class, 'show_statistic_revenue'])->name('show_statistic_revenue.index');
     });
     //Brand
-    Route::prefix('brand')->middleware(['can_view_attribute_category_vendor_category_brand'])->group(function (){
+    Route::prefix('brand')->group(function (){
         //show
         Route::get('/show_list_brand', [BrandController::class, 'show_list_brand'])->name('show_list_brand.index');
         Route::get('/show_add_brand', [BrandController::class, 'show_add_brand'])->name('show_add_brand.index');
@@ -65,7 +77,7 @@ Route::prefix('page')->middleware(['auth','can_view_all'])->group(function () {
         Route::get('/delete_brand/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
     });
     //Category
-    Route::prefix('category')->middleware(['can_view_attribute_category_vendor_category_brand'])->group(function (){
+    Route::prefix('category')->group(function (){
         //show
         Route::get('/show_list_category', [CategoryController::class, 'show_list_category'])->name('show_list_category.index');
         Route::get('/show_add_category', [CategoryController::class, 'show_add_category'])->name('show_add_category.index');
@@ -76,18 +88,18 @@ Route::prefix('page')->middleware(['auth','can_view_all'])->group(function () {
         Route::get('/delete_category/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
     });
     //Company
-    Route::prefix('company')->middleware(['can_view_statistic_company'])->group(function (){
+    Route::prefix('company')->group(function (){
         Route::get('/show_list_company', [CompanyController::class, 'show_list_company'])->name('show_list_company.index');
         Route::get('/show_add_company', [CompanyController::class, 'show_add_company'])->name('show_add_company.index');
     });
     //Order
-    Route::prefix('order')->middleware(['can_view_product_order_attribute'])->group(function (){
+    Route::prefix('order')->group(function (){
         Route::get('/show_list_order', [OrderController::class, 'show_list_order'])->name('show_list_order.index');
         Route::get('/show_add_order', [OrderController::class, 'show_add_order'])->name('show_add_order.index');
         Route::get('/show_edit_order', [OrderController::class, 'show_edit_order'])->name('show_edit_order.index');
     });
     //Product
-    Route::prefix('product')->middleware(['can_view_product_order_attribute'])->group(function (){
+    Route::prefix('product')->group(function (){
         //show
         Route::get('/show_list_product', [ProductController::class, 'show_list_product'])->name('show_list_product.index');
         Route::get('/show_add_product', [ProductController::class, 'show_add_product'])->name('show_add_product.index');
@@ -98,7 +110,7 @@ Route::prefix('page')->middleware(['auth','can_view_all'])->group(function () {
         Route::get('/delete_product/{id}', [ProductController::class, 'destroy'])->name('product.delete');
     });
     //Vendor
-    Route::prefix('vendor')->middleware(['can_view_attribute_category_vendor_category_brand'])->group(function (){
+    Route::prefix('vendor')->group(function (){
         //show
         Route::get('/show_list_vendor', [VendorController::class, 'show_list_vendor'])->name('show_list_vendor.index');
         Route::get('/show_add_vendor', [VendorController::class, 'show_add_vendor'])->name('show_add_vendor.index');
@@ -108,7 +120,7 @@ Route::prefix('page')->middleware(['auth','can_view_all'])->group(function () {
         Route::get('/delete_vendor/{id}', [VendorController::class, 'destroy'])->name('vendor.delete');
     });
     //Attribute
-    Route::prefix('attribute')->middleware(['can_view_product_order_attribute','can_view_attribute_category_vendor_category_brand'])->group(function (){
+    Route::prefix('attribute')->group(function (){
         //show
         Route::get('/show_list_attribute', [AttributeController::class, 'show_list_attribute'])->name('show_list_attribute.index');
         Route::get('/show_add_attribute', [AttributeController::class, 'show_add_attribute'])->name('show_add_attribute.index');
