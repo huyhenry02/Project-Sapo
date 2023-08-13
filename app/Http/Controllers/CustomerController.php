@@ -25,4 +25,9 @@ class CustomerController extends Controller
     {
         return view('page.customer.profile');
     }
+    public function add_customer(Request $request)
+    {
+
+    }
+
 }

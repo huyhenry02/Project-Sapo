@@ -15,6 +15,7 @@ use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\Attribute_ValueController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
     return redirect()->route('show_login.index');
